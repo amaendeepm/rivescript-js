@@ -247,7 +247,7 @@ class Brain
   ##
   # string _getReply (string user, string msg, string context, int step, scope)
   #
-  # The internal reply method. DO NOT CALL THIS DIRECTLY.
+  # The internal reply method. NOT TO CALL DIRECTLY.
   #
   # * user, msg and scope are the same as reply()
   # * context = "normal" or "begin"

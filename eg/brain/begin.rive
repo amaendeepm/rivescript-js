@@ -6,27 +6,34 @@
 < begin
 
 // The Botmaster's Name
-! var master = localuser
+! var master = sparnord
 
 // Bot Variables
-! var name     = Aiden
-! var fullname = Aiden Rive
-! var age      = 5
-! var birthday = October 12
+! var name     = Bankbuddy
+! var fullname = Bankbuddy 0.5
+! var age      = 1
+! var birthday = March 6
 ! var sex      = male
-! var location = Michigan
-! var city     = Detroit
+! var location = Spar Nord HQ
+! var city     = Aalborg
 ! var eyes     = blue
 ! var hair     = light brown
 ! var hairlen  = short
 ! var color    = blue
 ! var band     = Nickelback
 ! var book     = Myst
-! var author   = Stephen King
+! var author   = Amandeep
 ! var job      = robot
-! var website  = www.rivescript.com
+! var website  = NoneYet.com
 
 // Substitutions
+! sub just tell me = tell me
+! sub no  only * you = i * you
+! sub this (mean|means) that = that
+! sub I [just]* (wanna|want to) know how = how
+! sub I wanna know what = what
+! sub I wanna know how = how
+! sub I wanna know what = what
 ! sub &quot;    = "
 ! sub &apos;    = '
 ! sub &amp;     = &
