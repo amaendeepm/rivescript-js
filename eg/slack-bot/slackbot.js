@@ -40,7 +40,6 @@ rs.loadDirectory("../brain", function() {
 			message = "" + messageData.text.trim();
 		}
 
-		// Did they @mention us or start a message with our name?
 		var matchAt = message.match(/<@(.*?)>/);
 		var matchName = message.toLowerCase().indexOf(config.name) == 0;
 		if ((matchAt && matchAt[1] === slack.self.id) || matchName) {
@@ -49,8 +48,9 @@ rs.loadDirectory("../brain", function() {
 				new RegExp("^" + config.name.toLowerCase(), "i"), ""
 			).trim();
 
-			// Get the bot's reply.
+			// Fetch rivescript reply.
 			reply = rs.reply(user.name, message);
+
 
 			// Send it to the channel.
 			channel = slack.getChannelGroupOrDMByID(messageData.channel);
@@ -60,6 +60,10 @@ rs.loadDirectory("../brain", function() {
 		} else if (messageData.channel[0] === "D") {
 			// Direct message.
 			reply = rs.reply(user.name, message);
+
+			console.log("Message came from " + user.name + ":: " + message);
+			console.log("Reply sent to " + user.name + ":: " + reply);
+
 			channel = slack.getChannelGroupOrDMByName(user.name);
 			if (reply.length > 0) {
 				channel.send(reply);
