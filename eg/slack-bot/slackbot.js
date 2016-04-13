@@ -16,6 +16,10 @@ rs.loadDirectory("../brain", function() {
 	rs.sortReplies();
 	slack.login();
 
+	slack.on("webhook", function(msg) {
+			console.error("Message came on webhook: ", msg);
+	});
+
 	slack.on("error", function(err) {
 		console.error("Slack error:", err);
 	});
@@ -30,6 +34,7 @@ rs.loadDirectory("../brain", function() {
 	});
 
 	slack.on("message", function(data) {
+		console.log("registered incoming " + data);
 		var user = data._client.users[data.user];
 		var messageData = data.toJSON();
 		var message = "";
@@ -59,15 +64,26 @@ rs.loadDirectory("../brain", function() {
 			}
 		} else if (messageData.channel[0] === "D") {
 			// Direct message.
+			console.log("Message came: " + message);
+			if(user === undefined) {
+				console.log("Message came from webhook only");
+				reply = rs.reply("webhookbot", message);
+				channel = slack.getChannelGroupOrDMByName("webhookbot");
+				console.log("channel identified for webhook response: " + channel);
+			} else {
+			console.log("Message User object : " + user);
+			console.log("Message came from " + user.name + ":: " + message);
+
 			reply = rs.reply(user.name, message);
 
-			console.log("Message came from " + user.name + ":: " + message);
 			console.log("Reply sent to " + user.name + ":: " + reply);
 
 			channel = slack.getChannelGroupOrDMByName(user.name);
+			console.log("channel identified for direct response: ", channel);
 			if (reply.length > 0) {
 				channel.send(reply);
 			}
+		}
 		}
 	});
 })
